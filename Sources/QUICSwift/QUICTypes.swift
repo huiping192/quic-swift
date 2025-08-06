@@ -146,6 +146,7 @@ public enum PacketNumberSpace: CaseIterable {
 public enum QUICError: Error, LocalizedError, Equatable {
     case invalidFixedBit
     case unsupportedPacketType
+    case unsupportedFrameType
     case unsupportedVersion(UInt32)
     case invalidConnectionID
     case invalidPacketNumber
@@ -161,6 +162,8 @@ public enum QUICError: Error, LocalizedError, Equatable {
             return "Invalid fixed bit in QUIC packet header"
         case .unsupportedPacketType:
             return "Unsupported QUIC packet type"
+        case .unsupportedFrameType:
+            return "Unsupported QUIC frame type"
         case .unsupportedVersion(let version):
             return "Unsupported QUIC version: 0x\(String(version, radix: 16))"
         case .invalidConnectionID:
