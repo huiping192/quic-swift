@@ -60,6 +60,12 @@ public enum ConnectionError: Error, LocalizedError, Equatable {
     case handshakeFailed
     case protocolViolation(String)
     case timeout
+    case pathNotValidated
+    case migrationFailed(String)
+    case congestionControlFailure
+    case lossDetectionFailure
+    case retransmissionTimeout
+    case keyUpdateFailed
     
     public var errorDescription: String? {
         switch self {
@@ -71,6 +77,18 @@ public enum ConnectionError: Error, LocalizedError, Equatable {
             return "Protocol violation: \(reason)"
         case .timeout:
             return "Operation timed out"
+        case .pathNotValidated:
+            return "Network path not validated for migration"
+        case .migrationFailed(let reason):
+            return "Connection migration failed: \(reason)"
+        case .congestionControlFailure:
+            return "Congestion control algorithm failure"
+        case .lossDetectionFailure:
+            return "Loss detection mechanism failure"
+        case .retransmissionTimeout:
+            return "Retransmission timeout exceeded"
+        case .keyUpdateFailed:
+            return "Key update process failed"
         }
     }
 }
